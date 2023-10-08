@@ -19,20 +19,19 @@ function playRound(playerSelection, computerSelection) {
 
     if (playerSelection === computerSelection) 
     {
-        const roundOutcome = 'TIE';
-        return roundOutcome;   
+        return;  
     }
     else if (playerSelection == 'ROCK' && computerSelection == 'SCISSORS' 
     || playerSelection == 'SCISSORS' && computerSelection == 'PAPER' 
     || playerSelection == 'PAPER' && computerSelection == 'ROCK')
     {
-        const roundOutcome = `You Win! ${playerSelection} beats ${computerSelection}`;
+        const roundOutcome = `${playerSelection} beats ${computerSelection}, you wins the round!`;
         playerScore++;
         return roundOutcome;
     }
     else
     {
-        const roundOutcome = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        const roundOutcome = `${computerSelection} beats ${playerSelection}, computer wins the round!`;
         computerScore++;
         return roundOutcome;
     }
