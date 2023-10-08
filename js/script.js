@@ -27,18 +27,50 @@ function playRound(playerSelection, computerSelection) {
     || playerSelection == 'PAPER' && computerSelection == 'ROCK')
     {
         const roundOutcome = `You Win! ${playerSelection} beats ${computerSelection}`;
+        playerScore++;
         return roundOutcome;
     }
     else
     {
         const roundOutcome = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        computerScore++;
         return roundOutcome;
     }
 }
 
 
-const computerSelection = getComputerChoice();
-const playerSelection = 'ROCK';
+function game() {
+
+    for (let i = 1; i <= 5; i++) 
+    {
+        const computerSelection = getComputerChoice();
+        const playerSelection = prompt('Your Move?').toUpperCase();
+        console.log(playRound(playerSelection, computerSelection));
+    }
+
+    if (playerScore < computerScore) 
+    {
+        console.log('You LOST, Computer WINS!');
+        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
+    }
+    else if (playerScore > computerScore)
+    {   
+        console.log('You WINS!');
+        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
+    }
+    else
+    {
+        console.log('It\'s TIE!');
+        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
+    }
+}
+
+let playerScore = 0;
+let computerScore = 0;
+
+game();
 
 
-console.log(playRound(playerSelection, computerSelection));
+
+
+
