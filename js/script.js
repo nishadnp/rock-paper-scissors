@@ -14,12 +14,13 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     
-    console.log(playerSelection);
-    console.log(computerSelection)
+    console.log(`Your move: ${playerSelection}`);
+    console.log(`Computer move: ${computerSelection}`);
 
     if (playerSelection === computerSelection) 
     {
-        return;  
+        const roundOutcome = 'Round tie!'
+        return roundOutcome;  
     }
     else if (playerSelection == 'ROCK' && computerSelection == 'SCISSORS' 
     || playerSelection == 'SCISSORS' && computerSelection == 'PAPER' 
