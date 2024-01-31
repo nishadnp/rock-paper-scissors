@@ -41,12 +41,9 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
 
-    for (let i = 1; i <= 5; i++) 
-    {
-        const computerSelection = getComputerChoice();
-        const playerSelection = prompt('Your Move?').toUpperCase();
-        console.log(playRound(playerSelection, computerSelection));
-    }
+    const computerSelection = getComputerChoice();
+    const playerSelection = prompt('Your Move?').toUpperCase();
+    console.log(playRound(playerSelection, computerSelection));
 
     if (playerScore < computerScore) 
     {
