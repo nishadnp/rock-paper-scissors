@@ -12,14 +12,16 @@ function getComputerChoice() {
 
 
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
     
+    const computerSelection = getComputerChoice();
     console.log(`Your move: ${playerSelection}`);
     console.log(`Computer move: ${computerSelection}`);
 
     if (playerSelection === computerSelection) 
     {
-        const roundOutcome = 'Round tie!'
+        const roundOutcome = 'Round tie!';
+        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
         return roundOutcome;  
     }
     else if (playerSelection == 'ROCK' && computerSelection == 'SCISSORS' 
@@ -28,44 +30,32 @@ function playRound(playerSelection, computerSelection) {
     {
         const roundOutcome = `${playerSelection} beats ${computerSelection}, you wins the round!`;
         playerScore++;
+        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
         return roundOutcome;
     }
     else
     {
         const roundOutcome = `${computerSelection} beats ${playerSelection}, computer wins the round!`;
         computerScore++;
+        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
         return roundOutcome;
     }
 }
 
 
-function game() {
-
-    const computerSelection = getComputerChoice();
-    const playerSelection = prompt('Your Move?').toUpperCase();
-    console.log(playRound(playerSelection, computerSelection));
-
-    if (playerScore < computerScore) 
-    {
-        console.log('You LOST, Computer WINS!');
-        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
-    }
-    else if (playerScore > computerScore)
-    {   
-        console.log('You WINS!');
-        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
-    }
-    else
-    {
-        console.log('It\'s TIE!');
-        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
-    }
-}
 
 let playerScore = 0;
 let computerScore = 0;
 
-game();
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => { 
+    button.addEventListener('click', () => {
+        playRound(button.value.toUpperCase());
+    });
+});
+    
+
 
 
 
