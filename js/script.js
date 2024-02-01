@@ -1,3 +1,4 @@
+// Generate Computer's Choice.
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3);
     switch(choice) {
@@ -11,36 +12,48 @@ function getComputerChoice() {
 }
 
 
-
+// Play a round.
 function playRound(playerSelection) {
     
     const computerSelection = getComputerChoice();
-    console.log(`Your move: ${playerSelection}`);
-    console.log(`Computer move: ${computerSelection}`);
 
     if (playerSelection === computerSelection) 
     {
-        const roundOutcome = 'Round tie!';
-        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
-        return roundOutcome;  
+        choice.textContent = `Player Move: ${playerSelection}, Computer Move: ${computerSelection}`;
+        score.textContent = `Player: ${playerScore} ----- Computer: ${computerScore}`;
+        roundOutcome.textContent = 'Round tie!';  
     }
     else if (playerSelection == 'ROCK' && computerSelection == 'SCISSORS' 
     || playerSelection == 'SCISSORS' && computerSelection == 'PAPER' 
     || playerSelection == 'PAPER' && computerSelection == 'ROCK')
     {
-        const roundOutcome = `${playerSelection} beats ${computerSelection}, you wins the round!`;
         playerScore++;
-        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
-        return roundOutcome;
+        choice.textContent = `Player Move: ${playerSelection}, Computer Move: ${computerSelection}`;
+        score.textContent = `Player: ${playerScore} ----- Computer: ${computerScore}`;
+        roundOutcome.textContent = `${playerSelection} beats ${computerSelection}`;
     }
     else
     {
-        const roundOutcome = `${computerSelection} beats ${playerSelection}, computer wins the round!`;
         computerScore++;
-        console.log(`You: ${playerScore} \t Computer: ${computerScore}`);
-        return roundOutcome;
+        choice.textContent = `Player Move: ${playerSelection}, Computer Move: ${computerSelection}`;
+        score.textContent = `Player: ${playerScore} ----- Computer: ${computerScore}`;
+        roundOutcome.textContent = `${computerSelection} beats ${playerSelection}`;
+    }
+
+    if (playerScore === 5 || computerScore === 5)
+    {
+        displayWinner();
     }
 }
+
+// Display the first to score 5.
+function displayWinner() {
+    const winner = document.createElement('p');
+    container.appendChild(winner);
+    playerScore === 5 ? winner.textContent = "YOU WON THE GAME!" : winner.textContent = "COMPUTER WON THE GAME!";
+}
+
+
 
 
 
@@ -48,16 +61,22 @@ let playerScore = 0;
 let computerScore = 0;
 
 const buttons = document.querySelectorAll('button');
+const container = document.getElementById('container');
+
+const score = document.createElement('p');
+container.appendChild(score);
+const choice = document.createElement('p');
+container.appendChild(choice);
+const roundOutcome = document.createElement('p');
+container.appendChild(roundOutcome);
+
+
 
 buttons.forEach((button) => { 
     button.addEventListener('click', () => {
+        // Pass Player's choice fetched from the button pressed.
         playRound(button.value.toUpperCase());
     });
 });
     
-
-
-
-
-
 
