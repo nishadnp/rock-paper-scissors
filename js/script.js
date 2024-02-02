@@ -15,14 +15,17 @@ function getComputerChoice() {
 // Play a round.
 function playRound(playerSelection) {
     
+    // Fetch Computer's Move.
     const computerSelection = getComputerChoice();
 
+    // If round is not favourable to either of players.
     if (playerSelection === computerSelection) 
     {
         choice.textContent = `Player Move: ${playerSelection}, Computer Move: ${computerSelection}`;
         score.textContent = `Player: ${playerScore} ----- Computer: ${computerScore}`;
         roundOutcome.textContent = 'Round tie!';  
     }
+    // If round is in Player's favour.
     else if (playerSelection == 'ROCK' && computerSelection == 'SCISSORS' 
     || playerSelection == 'SCISSORS' && computerSelection == 'PAPER' 
     || playerSelection == 'PAPER' && computerSelection == 'ROCK')
@@ -32,6 +35,7 @@ function playRound(playerSelection) {
         score.textContent = `Player: ${playerScore} ----- Computer: ${computerScore}`;
         roundOutcome.textContent = `${playerSelection} beats ${computerSelection}`;
     }
+    // If round is in Computer's favour.
     else
     {
         computerScore++;
@@ -40,6 +44,7 @@ function playRound(playerSelection) {
         roundOutcome.textContent = `${computerSelection} beats ${playerSelection}`;
     }
 
+    // Deem the first player to scores 5 as winner.
     if (playerScore === 5 || computerScore === 5)
     {
         displayWinner();
@@ -48,17 +53,26 @@ function playRound(playerSelection) {
 
 // Display the first to score 5.
 function displayWinner() {
-    const winner = document.createElement('p');
     container.appendChild(winner);
-    playerScore === 5 ? winner.textContent = "YOU WON THE GAME!" : winner.textContent = "COMPUTER WON THE GAME!";
+    playerScore === 5 ?  winner.textContent = "YOU WON THE GAME!" : winner.textContent = "COMPUTER WON THE GAME!";
+    resetFlag = true;
+}
+
+// Reset scores and remove displayed results
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    choice.textContent = "";
+    score.textContent = "";
+    roundOutcome.textContent = "";
+    winner.textContent = "";
 }
 
 
 
-
-
-let playerScore = 0;
-let computerScore = 0;
+let playerScore = 0;    
+let computerScore = 0; 
+let resetFlag = false;
 
 const buttons = document.querySelectorAll('button');
 const container = document.getElementById('container');
@@ -69,12 +83,21 @@ const choice = document.createElement('p');
 container.appendChild(choice);
 const roundOutcome = document.createElement('p');
 container.appendChild(roundOutcome);
+const winner = document.createElement('p');
 
 
 
 buttons.forEach((button) => { 
     button.addEventListener('click', () => {
-        // Pass Player's choice fetched from the button pressed.
+
+        // Checks if the game needs to be resetted
+        if (resetFlag == true) 
+        {
+            resetFlag = false;
+            resetGame();
+        }
+
+        // Pass Player's choice of move fetched from the button pressed to playRound().
         playRound(button.value.toUpperCase());
     });
 });
