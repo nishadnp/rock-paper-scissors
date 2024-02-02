@@ -2,7 +2,9 @@
 
 ## About
 
-Simple implementation of grade-school classic “rock paper scissors” using JavaScript. User is prompt to enter a move of choice (Rock/Paper/Scissors) and computer makes a move from same choices. There are 5 rounds and the result will be based on recorded scores from each round.
+Simple implementation of grade-school classic “rock paper scissors” using JavaScript DOM.
+User clicks one of the buttons (ROCK, PAPER, SCISSORS) of choice per round and Computer also chooses a move of its own per round.
+The first player (either user or computer) to score 5 points wins the game. The Game automatically resets to start if the user attempts to play again.
 
 ## Link
 
@@ -10,4 +12,4 @@ Live Site: [rock-paper-scissors](https://nishadnp.github.io/rock-paper-scissors/
 
 ## Note
 
-Currently, there is no direct output on HTML page. Output can be seen from JS console in the browser.
+No styles added.
